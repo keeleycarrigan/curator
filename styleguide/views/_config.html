@@ -1,0 +1,74 @@
+{% extends '_template.html' %}
+
+{% block content %}
+	<h1 class="c-heading-5">Curator Configuration Options</h1>
+	<form action="#" id="c-config-form" class="c-form c-row">
+		<div class="c-row">
+			<div class="c-input-holder c-grid-full-sm c-grid-half">
+				<label for="localPort" class="c-label">Static Local Port</label>
+				<input type="text" name="localPort" value="{{config.localPort}}" id="localPort" class="c-edit-input" />
+			</div>
+			<div class="c-input-holder c-grid-full-sm c-grid-half">
+				<label for="bundleRoot" class="c-label">Bundle Root</label>
+				<input type="text" name="bundleRoot" value="{{config.bundleRoot}}" id="bundleRoot" class="c-edit-input" />
+			</div>
+		</div>
+		<div class="c-row">
+			<div class="c-input-holder c-grid-full-sm c-grid-half">
+				<label for="compDir" class="c-label">Main Component Directory</label>
+				<input type="text" name="compDir" value="{{config.compDir}}" id="compDir" class="c-edit-input" />
+			</div>
+			<div class="c-input-holder c-grid-full-sm c-grid-half">
+				<label for="pathSeparator" class="c-label">Page Path Separator</label>
+				<input type="text" name="pathSeparator" value="{{config.pathSeparator}}" id="pathSeparator" class="c-edit-input" />
+			</div>
+		</div>
+		<div class="c-row">
+			<div class="c-input-holder c-grid-full-sm c-grid-half">
+				<fieldset class="c-fieldset" name="cssFiles" form="c-config-form">
+					<legend class="c-legend">Sass Build Files</legend>
+					<ul class="c-file-list">
+					{% for cssFile in config.cssFiles %}
+					{% set idx = loop.key %}
+						<li class="c-row">
+							<div class="c-grid-two-third">
+								<input type="text" name="css-file-{{idx}}" value="{{cssFile}}" id="css-file-{{idx}}" class="c-edit-input" />
+							</div>
+							<div class="c-grid-one-third">
+								<a href="#" data-move="up" title="Move File Up In Build List"><i class="c-icon-up-arrow"></i></a>
+								<a href="#" data-move="down" title="Move File Down In Build List"><i class="c-icon-down-arrow"></i></a>
+							</div>
+						</li>
+					{% endfor %}
+					</ul>
+				</fieldset>
+				<a href="#" data-add-file="css">Add File <i class="c-icon-plus"></i></a>
+			</div>
+			<div class="c-input-holder c-grid-full-sm c-grid-half">
+				<fieldset class="c-fieldset" name="jsFiles" form="c-config-form">
+					<legend class="c-legend">Javascript Build List</legend>
+					<ul class="c-file-list">
+					{% for jsFile in config.jsFiles %}
+					{% set idx = loop.key %}
+						<li class="c-row">
+							<div class="c-grid-two-third">
+								<input type="text" name="js-file-{{idx}}" value="{{jsFile}}" id="js-file-{{idx}}" class="c-edit-input" />
+							</div>
+							<div class="c-grid-one-third">
+								<a href="#" data-move="up" title="Move File Up In Build List"><i class="c-icon-up-arrow"></i></a>
+								<a href="#" data-move="down" title="Move File Down In Build List"><i class="c-icon-down-arrow"></i></a>
+							</div>
+						</li>
+					{% endfor %}
+					</ul>
+				</fieldset>
+				<a href="#" data-add-file="js">Add File <i class="c-icon-plus"></i></a>
+			</div>
+		</div>
+		<div class="c-row">
+			<button id="save-config" class="c-btn">Save</button>
+			<span id="success-msg" class="resp-msg">Options Updated!</span>
+			<span id="error-msg" class="resp-msg">Error Updating Options</span>
+		</div>
+	</form>
+{% endblock %}

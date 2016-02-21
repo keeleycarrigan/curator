@@ -1,0 +1,65 @@
+#c-config {
+	.c-file-list {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		
+		li {
+			&:last-child {
+				[data-move='down'] {
+					visibility: hidden;
+				}
+			}
+
+			&:first-child {
+				[data-move='up'] {
+					visibility: hidden;
+				}	
+			}
+		}
+	}
+
+	.c-edit-input {
+		width: 100%;
+		@include rem-calc(padding, 5, 10);
+		border: 1px solid transparent;
+		outline: none;
+		cursor: pointer;
+		display: block;
+		
+		&:focus {
+			border-color: $c-color-3;
+			cursor: auto;
+		}
+		
+		&.error {
+			background-color: lighten(#CF4647, 15%);
+		}
+	}
+	
+	[data-add-file] {
+		@include rem-calc(margin-top, 10);
+		color: $c-color-4;
+		@include rem-calc(font-size, 14);
+		text-decoration: none;
+		display: block;
+		
+		&:hover {
+			color: darken($c-color-4, 15%);
+		}
+		
+		i {
+			@include rem-calc(font-size, 10);
+		}
+	}
+	
+	[data-move] {
+		color: $c-color-2;
+		@include rem-calc(font-size, 14);
+		text-decoration: none;
+		
+		&:hover {
+			color: darken($c-color-2, 5%);
+		}
+	}
+}

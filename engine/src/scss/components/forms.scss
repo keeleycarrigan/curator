@@ -1,0 +1,49 @@
+.c-form {
+	@include rem-calc(max-width, 900);
+	font-family: Helvetic, Arial, sans-serif;
+	
+	.c-input-holder {
+		@include rem-calc(padding-bottom, 20);
+	}
+	
+	.c-label,
+	.c-legend {
+		@include rem-calc(padding-bottom, 5);
+		color: darken($c-color-5, 5%);
+		display: block;
+	}
+	
+	.c-fieldset {
+		@include rem-calc(padding, 0, 0, 10, 0);
+		margin: 0;
+		border: none;
+		
+		.c-row {
+			padding-top: 0;
+		}
+	}
+	
+	.resp-msg {
+		@include rem-calc(margin-left, 20);
+		opacity: 1;
+		display: none;
+		font-weight: bold;
+		transition: opacity 3000ms 2000ms linear;
+		
+		&.show {
+			display: inline;
+		}
+		
+		&.fade-out {
+			opacity: 0;
+		}
+	}
+}
+
+#success-msg {
+	color: $c-color-3;
+}
+
+#error-msg {
+	color: #FA2A00;
+}

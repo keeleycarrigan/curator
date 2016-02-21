@@ -1,0 +1,16 @@
+{% extends '_template.html' %}
+
+{% block content %}
+	<ul class="c-mat-list">
+		{% for doc in appData.docs %}
+		<li id="{{doc.id}}" class="c-mat-item">
+			<article>
+				<header class="c-mat-header">
+					<h1 class="c-heading-4">{{doc.name}}</h1>
+				</header>
+				<div class="c-mat-doc">{{doc.content}}</div>
+			</article>
+		</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends '_template.html' %}
+
+{% block content %}
+	<h1 class="c-heading-2">{{material.name}}</h1>
+	{% if material.overview %}
+	<div class="mat-intro">
+		{{material.overview}}
+	</div>
+	{% endif %}
+	<ul class="c-mat-list">
+		{% for comp in material.items %}
+		<li id="{{comp.id}}" class="c-mat-item">
+			<article>
+				<header class="c-mat-header">
+					<h1 class="c-heading-4">
+						{{comp.name}}
+						{% if comp.types.length === 1 %}
+						<a href="#" class="c-link" data-toggle-src="{{comp.types[0].id}}"><i class="c-icon-code"></i></a>
+						{% endif %}
+					</h1>
+				</header>
+				{% if comp.types.length > 0 %}
+					<ul class="c-mat-type-list">
+						{% for type in comp.types %}
+						<li class="c-mat-type">
+							{% if comp.types.length > 1 %}
+							<h3 class="c-heading-5">
+								{{type.name}}
+								<a href="#" class="c-link" data-toggle-src="{{type.id}}"><i class="c-icon-code"></i></a>
+							</h3>
+							{% endif %}
+							<!-- Print out notes & formatted code from snippet. -->
+							{% if type.html.notes || type.html.formatted %}
+							<div class="c-mat-doc">
+								{{type.html.notes}}
+								{% if type.html.formatted %}
+								<div data-mat-src="{{type.id}}">
+									{{type.html.formatted}}
+								</div>
+								{% endif %}
+							</div>
+							{% endif %}
+							<!-- end notes -->
+							{{type.html.src}}
+						</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+				{% if comp.docs.length > 0 %}
+				<footer class="c-mat-footer">
+					<h4 class="c-heading-6">Docs</h5>
+					<ul class="c-mat-doc-list">
+						{% for doc in comp.docs %}
+						<li><a href="{{doc.link}}">{{doc.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</footer>
+				{% endif %}
+			</article>
+		</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

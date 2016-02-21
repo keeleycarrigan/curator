@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Powered By Curator</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/curator-core/assets/css/curator.css">
+	<link rel="stylesheet" href="/assets/css/screen.css">
+</head>
+<body>
+	<header class="c-main-header">
+		<h1 class="c-app-name">Curator <span class="powered-by">Powered By Curator</span></h1>
+		<nav class="c-header-nav align-right">
+			<ul>
+				<li><a href="#" data-toggle-nav><i class="c-icon-menu"></i></a></li>
+				{% if dev %}
+				<li><a href="/config"><i class="c-icon-gear"></i></a></li>
+				{% endif %}
+			</ul>
+		</nav>
+	</header>
+	<div class="c-wrap">
+		<nav class="c-nav">
+			<ul class="c-nav-list">
+				<li><a href="/" class="c-main-nav-item">Overview</a></li>
+				{% if appData.materials.length > 0 %}
+				{% for matLink in appData.materials %}
+				<li>
+					<a href="{{matLink.link}}" class="c-main-nav-item">{{matLink.name}}</a>
+					{% if matLink.items.length > 0 %}
+					<ul class="c-sub-nav">
+						{% for item in matLink.items %}
+						{% if material.name === matLink.name %}
+							{% set itemLink = '#' + item.id %}
+						{% else %}
+							{% set itemLink = item.link %}
+						{% endif %}
+						<li><a href="{{itemLink}}">{{item.name}}</a></li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</li>
+				{% endfor %}
+				{% endif %}
+				<li>
+					<span class="c-main-nav-item">Pages</span>
+					{% if appData.views.length > 0 %}
+					<ul class="c-sub-nav">
+						{% for view in appData.views %}
+						<li>
+							{% if view.link %}
+							<a href="{{view.link}}">{{view.name}}</a>
+							{% else %}
+							<span>{{view.name}}</span>
+							{% endif %}
+
+							{% if view.subpages.length > 0 %}
+								<ul class="c-sub-nav">
+									{% for subview in view.subpages %}
+									<li><a href="{{subview.link}}">{{subview.name}}</a></li>
+									{% endfor %}
+								</ul>
+							{% endif %}
+						</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</li>
+				<li>
+					<a href="/docs" class="c-main-nav-item">Docs</a>
+					{% if appData.docs.length > 0 %}
+					<ul class="c-sub-nav">
+						{% for doc in appData.docs %}
+						<li><a href="{{doc.link}}">{{doc.name}}</a></li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</li>
+			</ul>
+		</nav>
+		<main id="{{sectionID}}" class="c-main">
+			<div class="c-content">
+				{% block content %}{% endblock %}
+			</div>
+		</main>
+		<a href="#" class="mobile-nav-toggle" data-toggle-nav></a>
+	</div>
+
+	<script src="/curator-core/assets/js/curator.js"></script>
+</body>
+</html>

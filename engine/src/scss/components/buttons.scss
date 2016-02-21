@@ -1,0 +1,14 @@
+.c-btn {
+	@include rem-calc(padding, 5, 15);
+	background-color: $c-color-3;
+	color: #FFF;
+	@include rem-calc(line-height, 25);
+	@include rem-calc(font-size, 16);
+	outline: none;
+	display: inline-block;
+	border: none;
+	
+	&:hover {
+		background-color: darken($c-color-3, 5%);
+	}
+}

@@ -1,0 +1,13 @@
+node_modules
+*.log
+*sass-cache
+tmp
+.DS_Store
+
+dist
+
+styleguide/materials/**/*
+#!styleguide/materials/screen.scss
+
+styleguide/views/**/*
+!styleguide/views/_*

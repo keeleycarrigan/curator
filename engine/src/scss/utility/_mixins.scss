@@ -1,0 +1,97 @@
+$c-color-1: lighten($c-color-base, 25%);
+$c-color-2: lighten($c-color-base, 15%);
+$c-color-3: $c-color-base;
+$c-color-4: darken($c-color-base, 15%);
+$c-color-5: darken($c-color-base, 25%);
+
+@function get-rems ($nums, $delim: space) {
+	$max: length($nums);
+	$remValues: null;
+	
+	@for $i from 1 through $max {
+		$value: nth($nums, $i);
+
+		@if type-of($value) == "number" and unitless($value) {
+			$remValues: append($remValues, #{$value / $base-px}rem, $delim);
+		} @else {
+			$remValues: append($remValues, $value, $delim);
+		}
+	}
+	
+	@return $remValues;
+}
+
+@mixin rem-calc ($property, $values...) {
+	$max: length($values);
+	$pxValues: null;
+	$remValues: null;
+
+	@if $ie8-support or $property == "font" {
+		@for $i from 1 through $max {
+			$value: nth($values, $i);
+			
+			@if type-of($value) == "string" or type-of($value) == "color" {
+				$pxValues: append($pxValues, $value, space);
+			} @else {
+				$pxValues: append($pxValues, #{$value}px, space);
+			}
+		}	
+	}
+
+	@if $ie8-support or $property == "font" {
+		#{$property}: $pxValues;
+	}
+	
+	#{$property}: get-rems($values);
+}
+
+@mixin main-font {
+	font-family: "Helvetica", "Arial", "sans-serif";
+}
+
+@mixin clearfix {
+	&:before, &:after { content: " "; display: table; }
+	&:after { clear: both; }
+}
+
+@mixin opacity($opacity) {
+	opacity: $opacity;
+	$opacity-ie: $opacity * 100;
+	filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+@mixin translateX($x) {
+	$val: get-rems(($x));
+
+	-webkit-transform: translateY($val);
+	-ms-transform: translateY($val);
+	transform: translateY($val);
+}
+
+@mixin translateY($y) {
+	$val: get-rems(($y));
+
+	-webkit-transform: translateY($val);
+	-ms-transform: translateY($val);
+	transform: translateY($val);
+}
+
+@mixin transform($properties) {
+	-webkit-transform: $properties;
+	-ms-transform: $properties;
+	transform: $properties;
+}
+
+@mixin transition($properties) {
+	-webkit-transition: $properties;
+	-ms-transition: $properties;
+	transition: $properties;
+}
+
+@mixin translate3($x, $y, $z) {
+	$vals: get-rems(($x, $y, $z), comma);
+
+	// -webkit-transform: translate3d($vals);
+	-ms-transform: translate(set-nth($vals, 4, null));
+	transform: translate3d($vals);
+}

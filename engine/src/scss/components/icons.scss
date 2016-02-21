@@ -1,0 +1,54 @@
+@font-face {
+	font-family: 'curator-icons';
+	src:    url('../fonts/curator-icons.eot?whfbge');
+	src:    url('../fonts/curator-icons.eot?whfbge#iefix') format('embedded-opentype'),
+		url('../fonts/curator-icons.ttf?whfbge') format('truetype'),
+		url('../fonts/curator-icons.woff?whfbge') format('woff'),
+		url('../fonts/curator-icons.svg?whfbge#curator-icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class*='c-icon-']:before,
+[class^=' c-icon-']:before {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'curator-icons' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.c-icon-close:before {
+	content: "\e901";
+}
+.c-icon-plus:before {
+	content: "\e902";
+}
+.c-icon-left-arrow:before {
+	content: "\e903";
+}
+.c-icon-right-arrow:before {
+	content: "\e904";
+}
+.c-icon-down-arrow:before {
+	content: "\e905";
+}
+.c-icon-up-arrow:before {
+	content: "\e900";
+}
+.c-icon-code:before {
+	content: "\e906";
+}
+.c-icon-gear:before {
+	content: "\e907";
+}
+.c-icon-menu:before {
+	content: "\e908";
+}

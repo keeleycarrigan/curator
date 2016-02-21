@@ -1,0 +1,13 @@
+{
+    "localPort": "3000",
+    "bundleDir": "dist",
+    "bundleRoot": "/styleguide",
+    "compDir": "materials",
+    "pathSeparator": "<i class='c-icon-right-arrow'></i>",
+    "cssFiles": [
+        "screen.scss"
+    ],
+    "jsFiles": [
+        "main.js"
+    ]
+}

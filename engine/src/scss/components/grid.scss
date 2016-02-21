@@ -1,0 +1,78 @@
+.c-row {
+	width: 100%;
+	@include clearfix;
+	
+	.c-row {
+		width: auto;
+		@include rem-calc(margin-left, -10);
+		@include rem-calc(margin-right, -10);
+	}	
+}
+
+[class*='c-grid-'] {
+	@include rem-calc(padding-left, 10);
+	@include rem-calc(padding-right, 10);
+	float: left;
+}
+
+.c-grid-whole {
+	width: 100%;
+}
+
+.c-grid-third {
+	width: 33.3333%;
+}
+
+.c-offset-third {
+	margin-left: 33.3333%;
+}
+
+.c-grid-two-third {
+	width: 66.6666%;
+}
+
+.c-grid-half {
+	width: 50%;
+}
+
+.c-offset-half {
+	margin-left: 50%;
+}
+
+.c-grid-fourth {
+	width: 25%;
+}
+
+.c-offset-fourth {
+	margin-left: 25%;
+}
+
+.c-grid-three-fourth {
+	width: 75%;
+}
+
+@media #{$sm-only} {
+	.c-grid-full-sm {
+		width: 100%;
+	}
+}
+
+.c-main {
+	@include rem-calc(padding, 30, 20, 30);
+	display: block;
+	@include clearfix;
+	
+	@media #{$md} {
+		@include rem-calc(margin-left, 200);
+		transition: margin-left 300ms linear;
+		
+		.c-nav-toggled & {
+			@include rem-calc(margin-left, 0);
+		}
+	}
+	
+	@media #{$lg} {
+		@include rem-calc(margin-left, 300);
+	}
+}
+

@@ -1,0 +1,123 @@
+html,
+body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: ($base-px - 2) * 1px;
+
+	@media #{$md} {
+		font-size: ($base-px - 1) * 1px;
+	}
+
+	@media #{$lg} {
+		font-size: $base-px * 1px;
+	}
+}
+
+body {
+	background-color: #FFF;
+	
+	@media #{$sm-only} {
+		&.c-nav-toggled {
+			overflow: hidden;
+		}
+	}
+}
+
+[class*='c-'],
+[class*='c-']:before,
+[class*='c-']:after {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.c-wrap {
+	height: 100%;
+	width: 100%;
+	
+	@media #{$sm-only} {
+		transition: transform 300ms linear;
+
+		.c-nav-toggled & {
+			@include translate3(250, 0, 0);
+		}
+	}
+}
+
+@for $i from 1 through 6 {
+	$exp: 9 - $i;
+
+	.c-heading-#{$i} {
+		@if $i < 3 {
+			@include rem-calc(padding-bottom, $exp);
+			// border-bottom: 1px solid $c-color-3;
+		}
+		@include rem-calc(margin-bottom, ($exp * 4));
+		color: darken($c-color-5, 5%);
+		@include rem-calc(font-size, ($exp * 5));
+		font-family: Helvetica, Arial, sans-serif;
+		
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+}
+
+.c-link {
+	color: $c-color-3;
+	text-decoration: none;
+}
+
+.c-txt-center {
+	text-align: center;
+}
+
+.c-txt-left {
+	text-align: left;
+}
+
+.c-txt-right {
+	text-align: right;
+}
+
+[data-toggle-src] {
+	display: inline-block;
+	vertical-align: middle;
+
+	&:hover {
+		color: $c-color-5;
+	}
+	
+	.c-heading-2 & {
+		@include rem-calc(font-size, 16);
+		@include rem-calc(line-height, 16);
+	}
+	
+	.c-heading-3 & {
+		@include rem-calc(font-size, 18);
+		@include rem-calc(line-height, 18);
+	}
+}
+
+.c-content {
+	@include rem-calc(margin-top, 50);
+}
+
+.mobile-nav-toggle {
+	display: none;
+	
+	@media #{$sm-only} {
+		.c-nav-toggled & {
+			height: 100%;
+			width: 100%;
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+	}
+}

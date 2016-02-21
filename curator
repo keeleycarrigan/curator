@@ -1,0 +1,124 @@
+#!/usr/bin/env node
+
+var config = require('./config.json'),
+	cli = require('cli'),
+	childProcess = require('child_process'),
+	spawn = childProcess.spawn,
+	exec = childProcess.exec,
+	colors = require('colors'),
+	bs = require('browser-sync').create(),
+	app = require('./engine/app'),
+	fileProcess = require('./engine/controllers/process'),
+	swig = require('swig'),
+	appData = require('./data.json'),
+	swigOpts = {
+		cache: false,
+		autoescape: false,
+		locals: {
+			appData: appData,
+			dev: true
+		}
+	},
+	procs = {};
+	
+var bsError = function (err, bs) {
+		if (err) {
+			cli.error('Error starting BrowserSync server. Check application.');
+		} else {
+			cli.ok('Curator Server Started!'.green);
+		}
+	},
+	processError = function (data) {
+		var res = data.toString();
+
+		if (/Error/g.test(res)) {
+			cli.error(res.magenta);
+		}
+	};
+
+cli.parse({
+	preview: ['p', 'Preview styleguide', 'boolean', false],
+	noSync: ['ns', 'Disable BrowserSync', 'boolean', false],
+	bundle: ['b', 'Output a static version of the styleguide.', 'boolean', false],
+	dev: ['d', 'Starts the development environment', 'string', false]
+});
+
+cli.main(function (args, opts) {
+	if (opts.preview || opts.bundle || opts.dev) {
+		var devMode = opts.dev;
+
+		if (opts.bundle) {
+			swigOpts.locals.dev = false;
+		}
+
+		swig.setDefaults(swigOpts);
+		
+		app.start().then(function () {
+			var localPort = parseInt(config.localPort, 10);
+
+			if ((devMode && !opts.noSync) || opts.preview) {
+				if (devMode === 'all' || devMode === 'core') {
+					bs.watch('./engine/public/**/*').on('change', function (file) {
+						bs.reload(file);
+						cli.ok(file.magenta + ' reloaded!'.cyan);
+					});
+				}
+				
+				if (devMode === 'all' || devMode === 'ui') {
+					bs.watch('styleguide/assets/**/*').on('change', function (file) {
+						bs.reload(file);
+						cli.ok(file.magenta + ' reloaded!'.cyan);
+					});
+				}
+
+				if (devMode) {
+					bs.watch('styleguide/**/{*.html|*.md|*.json}', {ignoreInitial: true}, function (event, file) {
+						app.rebuild().then(function () {
+							console.log(event + ' ' + file);
+							bs.reload();
+							cli.ok('Curator reloaded!'.cyan);
+						});
+					});
+				}
+				
+				bs.init({
+					proxy: 'http://localhost:' + localPort,
+					port: (localPort + 1),
+					open: 'external'
+				}, bsError);
+			}
+
+			if (devMode === 'all' || devMode === 'core') {
+				procs.coreWatch = spawn('gulp', ['curator:watch']);
+
+				procs.coreWatch.stdout.on('data', processError);
+				
+				procs.coreWatch.stderr.on('data', function (data) {
+					procs.coreWatch.kill();
+				});
+			}
+			
+			if (devMode === 'all' || devMode === 'ui') {
+				procs.uiWatch = spawn('gulp', ['material:watch']);
+
+				procs.uiWatch.stdout.on('data', processError);
+				
+				procs.uiWatch.stderr.on('data', function (data) {
+					procs.uiWatch.kill();
+				});
+			}
+
+			if (opts.bundle) {
+				procs.uiBundle = exec('gulp bundle');
+				
+				procs.uiBundle.on('close', function (code, signal) {
+					cli.ok('Static styleguide generated in "'.green + config.bundleDir.magenta + '".'.green);
+
+					app.stop();
+				});
+			}
+		});
+	} else {
+		cli.error('Please pass the preview, dev, or bundle flags'.red);
+	}
+});

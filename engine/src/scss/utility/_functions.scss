@@ -1,0 +1,21 @@
+@function lower-bound($range){
+  @if length($range) <= 0 {
+    @return 0;
+  }
+  @return nth($range,1);
+}
+
+@function upper-bound($range) {
+  @if length($range) < 2 {
+    @return 999999999999;
+  }
+  @return nth($range, 2);
+}
+
+@function grid-calc($totalColumns, $columns, $rows) {
+	@if $rows {
+		@return percentage($rows / $columns);
+	} @else {
+		@return percentage(($columns / $totalColumns));
+	}
+}

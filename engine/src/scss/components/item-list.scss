@@ -1,0 +1,84 @@
+.mat-intro {
+	@include rem-calc(margin-bottom, 20);
+	@include clearfix();
+}
+
+.c-mat-list {
+	padding: 0;
+	margin: 0;
+	
+	.c-mat-item {
+		@include rem-calc(padding, 50, 0, 100);
+		@include rem-calc(margin-top, -50);
+		border-top: 2px solid $c-color-3;
+		list-style: none;
+		@include clearfix();
+		
+		&:first-child {
+			@include rem-calc(margin-top, -50);
+			border-top: none;
+		}
+		
+		&:last-child {
+			@include rem-calc(padding-bottom, 20);
+		}
+	}
+}
+
+.c-mat-type-list {
+	padding: 0;
+	margin: 0;
+	@include clearfix();
+	
+	.c-mat-type {
+		@include rem-calc(padding-top, 25);
+		list-style: none;
+		
+		&:first-child {
+			padding-top: 0;
+		}
+	}
+}
+
+.c-mat-header {
+	@include clearfix();
+}
+
+.c-mat-footer {
+	@include rem-calc(padding-top, 25);
+	font-family: "Helvetica", "Arial", "sans-serif";
+	@include clearfix();
+
+	.c-mat-doc-list {
+		@include rem-calc(padding, 0);
+		list-style: none;
+		float: left;
+
+		li {
+			@include rem-calc(padding-left, 15);
+			float: left;
+			
+			&:first-child {
+				padding-left: 0;
+			}
+		}
+		
+		a {
+			color: $c-color-4;
+			text-decoration: none;
+			font-weight: bold;
+			
+			&:hover {
+				color: $c-color-5;
+			}
+		}
+	}
+}
+
+[data-mat-src] {
+	display: none;
+	
+	&.show {
+		display: block;
+	}
+}

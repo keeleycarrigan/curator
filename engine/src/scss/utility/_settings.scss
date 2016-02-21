@@ -1,0 +1,18 @@
+// Grid Setting Mixins
+$total-columns: 12 !default;
+$total-rows: 12 !default;
+$block-increments: 3 4;
+$column-gutter: 15;
+$max-content-width: 1000;
+$breakpoints: ("sm", $sm, $sm-only),
+			  ("md", $md, $md-only, $md-down),
+			  ("lg", $lg, $lg-only, $lg-down),
+			  ("xl", $xl, $xl-only, $xl-down);
+$opposite-direction: right;
+$opposite-float: right;
+$default-float: left;
+$include-block-grid: true !default;
+$ie8-support: false !default;
+
+$base-px: 16;
+$c-color-base: #68B3AF;

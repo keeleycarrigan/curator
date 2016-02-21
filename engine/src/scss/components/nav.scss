@@ -1,0 +1,146 @@
+.c-nav {
+	height: 100vh;
+	@include rem-calc(width, 250);
+	background-color: lighten($c-color-1, 10%);
+	font-family: Helvetica, Arial, sans-serif;
+	@include rem-calc(font-size, 14);
+	overflow-y: auto;
+	position: fixed;
+	left: 0;
+	
+	@media #{$sm-only} {
+		@include translate3(-250, 0, 0);
+	}
+	
+	@media #{$md} {
+		@include rem-calc(width, 200);
+		@include rem-calc(padding-top, 50);
+		background-color: transparent;
+		top: 0 !important;
+		left: 0;
+		transition: left 300ms linear;
+		
+		.c-nav-toggled & {
+			@include rem-calc(left, -200);
+		}
+	}
+	
+	@media #{$lg} {
+		@include rem-calc(width, 300);
+
+		.c-nav-toggled & {
+			@include rem-calc(left, -300);
+		}
+	}
+	
+	*,
+	*:before,
+	*:after {
+	    -moz-box-sizing: border-box;
+	    box-sizing: border-box;
+	}
+	
+	ul {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+	
+	a,
+	li {
+		color: darken($c-color-5, 5%);
+		text-decoration: none;
+	}
+	
+	a,
+	span {
+		width: 100%;
+		display: block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	
+	.c-nav-list {
+		@include rem-calc(padding, 25, 20);
+
+		> li {
+			@include rem-calc(padding-bottom, 30);
+			
+			> .c-sub-nav {
+				> li:first-child {
+					border-width: 3px;
+				}
+			}
+			
+			&:last-child {
+				padding-bottom: 0;
+			}
+		}
+	}
+	
+	.c-main-nav-item {
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+	
+	a.c-main-nav-item {
+		&:hover {
+			color: $c-color-4;
+		}
+	}
+	
+	.c-sub-nav {
+		@include rem-calc(padding, 15, 0, 0, 0);
+		border-bottom: 1px solid $c-color-2;
+		
+		@media #{$md} {
+			border-color: $c-color-1;
+		}
+		
+		li {
+			border-top: 1px solid $c-color-2;
+		
+			@media #{$md} {
+				border-color: $c-color-1;
+			}
+		}
+		
+		a,
+		span {
+			@include rem-calc(line-height, 40);
+		}
+		
+		a {
+			@include rem-calc(padding, 0, 15);
+
+			&:hover {
+				background-color: lighten($c-color-1, 15%);
+			}
+			
+			&.active {
+				border-left: 5px solid $c-color-1;
+				
+				@media #{$sm-only} {
+					border-color: lighten($c-color-1, 5%);
+				}
+			}
+		}
+		
+		
+		
+		.c-sub-nav {
+			padding-top: 0;
+			border-bottom: none;
+			
+			a,
+			span {
+				@include rem-calc(padding-left, 20);
+			}
+			
+			.c-icon-right-arrow {
+				@include rem-calc(font-size, 10);
+			}
+		}
+	}
+}

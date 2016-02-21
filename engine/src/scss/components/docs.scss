@@ -1,0 +1,217 @@
+.c-mat-doc {
+	@include rem-calc(font-size, 15);
+	@include main-font;
+	@include clearfix();
+	
+	> *:first-child {
+		margin-top: 0 !important;
+	}
+
+	> *:last-child {
+		margin-bottom: 0 !important;
+	}
+	
+	img {
+		border: 0;
+	}
+	
+	
+	
+	input[type="checkbox"] {
+		box-sizing: border-box;
+		padding: 0;
+	}
+	
+	dl {
+		padding: 0;
+		
+		dt {
+			padding: 0;
+			@include rem-calc(margin-top, 15);
+			font-size: 1em;
+			font-style: italic;
+			font-weight: bold;
+		}
+		
+		dd {
+			@include rem-calc(padding, 0, 15);
+			@include rem-calc(margin-bottom, 15);
+			margin-left: 0;
+		}
+	}
+}
+
+.c-doc-p {
+	margin-top: 0;
+	@include rem-calc(margin-bottom, 15);
+	@include rem-calc(font-size, 15);
+	@include main-font;
+	
+	a {
+		background-color: transparent;
+		color: $c-color-3;
+		
+		&:active,
+		&:hover {
+			color: $c-color-4;
+			outline: 0;		}
+	}
+	
+	strong {
+		font-weight: bold;
+	}
+}
+
+ul.c-doc-list {
+	list-style-type: disc;
+}
+
+.c-doc-list {
+	@include rem-calc(padding-left, 20);
+	@include rem-calc(margin-bottom, 15);
+	@include main-font;
+	
+	li {
+		@include rem-calc(margin-top, 5);
+		@include rem-calc(font-size, 15);
+		
+		&:first-child {
+			margin-top: 0;
+		}
+		
+		&:last-child {
+			.c-doc-list {
+				margin-bottom: 0;
+			}
+		}
+	}
+	
+	.c-doc-list {
+		@include rem-calc(padding-left, 30);
+		@include rem-calc(margin-top, 10);
+		@include rem-calc(margin-bottom, 10);
+		
+		ol.c-doc-list {
+			list-style-type: lower-alpha;
+		}
+	}
+	
+	ul.c-doc-list {
+		list-style-type: circle;
+	}
+	
+	ol.c-doc-list {
+		list-style-type: lower-roman;
+	}
+}
+
+.c-doc-p,
+.c-doc-list {
+	code {
+		@include rem-calc(padding, 0, 5);
+		background-color: lighten($c-color-1, 10%);
+	}
+}
+
+.c-doc-table {
+	width: 100%;
+	@include rem-calc(margin-bottom, 10);
+	@include main-font;
+	word-break: normal;
+	word-break: keep-all;
+	border-collapse: collapse;
+	border-spacing: 0;
+	overflow: auto;
+	display: block;
+	
+	td,
+	th {
+		padding: 0;
+	}
+	
+	th {
+		font-weight: bold;
+	}
+	
+	th,
+	td {
+		@include rem-calc(padding, 6, 12);
+		border: 1px solid $c-color-1;
+	}
+	
+	tr {
+		background-color: #FFF;
+		border-top: 1px solid #CCC;
+		
+		&:nth-child(2n) {
+			background-color: lighten($c-color-1, 10%);
+		}
+	}
+}
+
+.c-doc-quote {
+	@include rem-calc(margin, 0, 0, 15, 0);
+	margin-top: 0;
+	@include rem-calc(margin-bottom, 15);
+	@include rem-calc(font-size, 12);
+	@include rem-calc(padding, 0, 15);
+	color: #777;
+	border-left: 4px solid $c-color-1;
+	
+	> :first-child {
+		margin-top: 0;
+	}
+	
+	> :last-child {
+		margin-bottom: 0;
+	}
+}
+
+.c-doc-rule {
+	height: 0;
+	@include rem-calc(margin, 15, 0);
+	overflow: hidden;
+	background: transparent;
+	border: 0;
+	border-bottom: 3px solid lighten($c-color-1, 5%);
+	box-sizing: content-box;
+	@include clearfix();
+}
+
+.c-code {
+	@include rem-calc(padding, 10);
+	margin-top: 0;
+	@include rem-calc(margin-bottom, 15);
+	background-color: lighten($c-color-1, 10%);
+	@include rem-calc(font-size, 15);
+	border-radius: 2px;
+	
+	code {
+		background-color: transparent;
+	}
+}
+
+.c-swatch-list {
+	padding: 0;
+	@include rem-calc(margin, 0, 0, 15);
+	display: flex;
+}
+
+.c-swatch-item {
+	@include main-font;
+	list-style: none;
+	flex-direction: row;
+	flex-grow: 1;
+	
+	p {
+		margin-top: 0;
+		@include rem-calc(font-size, 15);
+	}
+}
+
+.c-swatch {
+	width: 100%;
+	@include rem-calc(border-top, 50, solid, red);
+	@include rem-calc(margin, 0, 0, 10);
+	display: block;
+}

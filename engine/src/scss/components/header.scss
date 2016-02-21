@@ -1,0 +1,100 @@
+.c-main-header {
+    @include rem-calc(height, 50);
+    width: 100%;
+    @include rem-calc(padding, 0, 20);
+    background-color: $c-color-3;
+    display: table;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    
+    @media #{$sm-only} {
+        transition: transform 300ms linear;
+
+        .c-nav-toggled & {
+            @include translate3(250, 0, 0);
+        }
+    }
+    
+    .c-app-name {
+        width: 1px;
+        padding: 0;
+        margin: 0;
+        color: darken($c-color-5, 5%);
+        font-weight: bold;
+        @include rem-calc(font-size, 25);
+        font-family: "Helvetica", "Arial", "sans-serif";
+        border: none;
+        white-space: nowrap;
+        display: table-cell;
+        vertical-align: middle;
+        
+        .powered-by {
+            @include rem-calc(font-size, 10);
+            text-transform: uppercase;
+            
+            @media #{$sm-only} {
+                display: none;
+            }
+        }
+    }
+    
+    .c-header-nav {
+        display: table-cell;
+        vertical-align: middle;
+        
+        &:last-child {
+            @include rem-calc(padding-left, 20);
+            
+            &.align-right {
+                @include rem-calc(padding-right, 20);
+                text-align: right;
+            }
+        }
+        
+        &:first-child {
+            @include rem-calc(padding-right, 20);
+            
+            &.align-right {
+                text-align: right;
+            }
+        }
+        
+        ul {
+            padding: 0;
+            margin: 0;
+            margin: 0;
+            list-style: none;
+            display: inline-block;
+        }
+        
+        li {
+            @include rem-calc(padding, 0, 10);
+            display: inline-block;
+            
+            &:first-child {
+                padding-left: 0;
+            }
+            
+            &:last-child {
+                padding-right: 0;
+            }
+        }
+        
+        a {
+            color: $c-color-5;
+            @include rem-calc(font-size, 16);
+            text-decoration: none;
+            display: inline-block;
+            
+            &:hover {
+                color: $c-color-4;
+            }
+        }
+        
+        [class*='c-icon-']:before {
+            vertical-align: middle;
+        }
+    }
+}
