@@ -6,18 +6,28 @@ var appRoot = require('app-root-path'),
 	bodyParser = require('body-parser'),
 	jsonParser = bodyParser.json(),
 	path = require('path'),
-	swig = require('swig'),
+	nunjucks = require('nunjucks'),
 	Q = require('q'),
 	appData = require(appRoot + '/data.json'),
 	dataCtrl = require(appRoot + '/engine/controllers/data-builder'),
 	matRoute = require(appRoot + '/engine/routes/materials'),
 	configRoute = require(appRoot + '/engine/routes/config'),
-	server = null;
+	server = null,
+	nunEnv;
 
-app.engine('html', swig.renderFile);
+app.engine('html', nunjucks.render);
 // telling express the default folder for pages is 'views'
 app.set('views', appRoot + '/styleguide/views');
-// 'html' is definied above through swig
+
+nunEnv = nunjucks.configure(app.get('views'), {
+	cache: false,
+	autoescape: false,
+	express: app
+});
+
+nunEnv.addGlobal('appData', appData);
+nunEnv.addGlobal('dev', true);
+
 app.set('view engine', 'html');
 
 app.use(express.static(appRoot + '/styleguide'));
@@ -57,6 +67,7 @@ router.get('/pages/*', function (req, res) {
 app.use('/', router);
 
 module.exports = {
+	nunjucks: nunEnv,
 	rebuild: function (cb) {
 		return dataCtrl.buildUIData();
 	},

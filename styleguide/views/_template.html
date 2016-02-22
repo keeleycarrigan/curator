@@ -30,7 +30,7 @@
 					{% if matLink.items.length > 0 %}
 					<ul class="c-sub-nav">
 						{% for item in matLink.items %}
-						{% if material.name === matLink.name %}
+						{% if material.name == matLink.name %}
 							{% set itemLink = '#' + item.id %}
 						{% else %}
 							{% set itemLink = item.link %}
