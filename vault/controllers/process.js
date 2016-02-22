@@ -4,7 +4,6 @@ var appRoot = require('app-root-path'),
 	marked = require('marked'),
 	markRender = new marked.Renderer(),
 	hljs = require('highlight.js'),
-	cheerio = require('cheerio'),
 	highlighter = function (code) {
 		return hljs.highlightAuto(code).value;
 	};
@@ -58,7 +57,7 @@ var wordCase = function (word, caseDir) {
 	},
 	removeOrderNum = function (string) {
 		return string.replace(/^(\d-)/, '');
-	}
+	},
 	processMD = function (md) {
 		return md ? marked(md, {renderer: markRender}) : false;
 	},

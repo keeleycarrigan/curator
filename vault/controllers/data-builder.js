@@ -3,11 +3,11 @@ var appRoot = require('app-root-path'),
 	jsondir = require('jsondir'),
 	path = require('path'),
 	fs = require('fs'),
-	procSrvc = require(appRoot + '/engine/controllers/process'),
+	procSrvc = require(appRoot + '/vault/controllers/process'),
 	_ = require('lodash'),
 	Q = require('q'),
 	viewData = require(appRoot + '/data.json'),
-	utils = require(appRoot + '/engine/utility');
+	utils = require(appRoot + '/vault/utility');
 
 	/**
 	 * Removes dashes and creates a title case name.

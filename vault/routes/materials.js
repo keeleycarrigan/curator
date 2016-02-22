@@ -1,7 +1,7 @@
 var appRoot = require('app-root-path'),
 	config = require(appRoot + '/config.json'),
 	utils = require('../utility'),
-	procSrvc = require(appRoot + '/engine/controllers/process'),
+	procSrvc = require(appRoot + '/vault/controllers/process'),
 	_ = require('lodash');
 
 module.exports = {

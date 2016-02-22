@@ -7,8 +7,8 @@ var config = require('./config.json'),
 	exec = childProcess.exec,
 	colors = require('colors'),
 	bs = require('browser-sync').create(),
-	app = require('./engine/app'),
-	fileProcess = require('./engine/controllers/process'),
+	app = require('./vault/app'),
+	fileProcess = require('./vault/controllers/process'),
 	appData = require('./data.json'),
 	procs = {};
 	
@@ -47,7 +47,7 @@ cli.main(function (args, opts) {
 
 			if ((devMode && !opts.noSync) || opts.preview) {
 				if (devMode === 'all' || devMode === 'core') {
-					bs.watch('./engine/public/**/*').on('change', function (file) {
+					bs.watch('./vault/public/**/*').on('change', function (file) {
 						bs.reload(file);
 						cli.ok(file.magenta + ' reloaded!'.cyan);
 					});

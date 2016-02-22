@@ -9,9 +9,9 @@ var appRoot = require('app-root-path'),
 	nunjucks = require('nunjucks'),
 	Q = require('q'),
 	appData = require(appRoot + '/data.json'),
-	dataCtrl = require(appRoot + '/engine/controllers/data-builder'),
-	matRoute = require(appRoot + '/engine/routes/materials'),
-	configRoute = require(appRoot + '/engine/routes/config'),
+	dataCtrl = require(appRoot + '/vault/controllers/data-builder'),
+	matRoute = require(appRoot + '/vault/routes/materials'),
+	configRoute = require(appRoot + '/vault/routes/config'),
 	server = null,
 	nunEnv;
 
@@ -31,7 +31,7 @@ nunEnv.addGlobal('dev', true);
 app.set('view engine', 'html');
 
 app.use(express.static(appRoot + '/styleguide'));
-app.use('/curator-core/assets', express.static(appRoot + '/engine/public'));
+app.use('/curator-core/assets', express.static(appRoot + '/vault/public'));
 
 router.use(function(req, res, next) {
 	/**

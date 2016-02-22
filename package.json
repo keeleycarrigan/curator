@@ -1,26 +1,22 @@
 {
-  "name": "terrible-lizard-ui-kit",
-  "version": "0.0.1",
-  "description": "UI kit for Terrible Lizard",
+  "name": "curator",
+  "version": "0.0.9",
+  "description": "Curator is a tool for building component style guides and UI kits.",
   "author": "Keeley Carrigan",
   "license": "ISC",
   "dependencies": {
     "app-root-path": "^1.0.0",
     "body-parser": "^1.13.3",
     "browser-sync": "^2.10.0",
-    "cheerio": "^0.19.0",
     "cli": "^0.11.1",
     "colors": "^1.1.2",
     "express": "^4.13.3",
     "highlight.js": "^8.9.1",
-    "js-beautify": "^1.5.10",
     "jsondir": "^0.1.3",
     "lodash": "^4.5.0",
     "marked": "^0.3.5",
     "nunjucks": "^2.3.0",
-    "q": "^1.4.1",
-    "request": "^2.67.0",
-    "syntax": "^1.1.0"
+    "q": "^1.4.1"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

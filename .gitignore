@@ -7,7 +7,6 @@ tmp
 dist
 
 styleguide/materials/**/*
-#!styleguide/materials/screen.scss
 
 styleguide/views/**/*
 !styleguide/views/_*

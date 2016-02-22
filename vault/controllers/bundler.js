@@ -1,6 +1,4 @@
-var request = require('request'),
-	cheerio = require('cheerio'),
-	_ = require('lodash'),
+var _ = require('lodash'),
 	utils = require('../utility'),
 	viewData = require('../../data.json');
 

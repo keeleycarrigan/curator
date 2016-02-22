@@ -3,16 +3,16 @@
 var config = require('./config.json'),
 	gulp = require('gulp'),
 	mods = require('gulp-load-plugins')({pattern: ['*'], scope: ['devDependencies']}),
-	dataCtrl = require('./engine/controllers/data-builder'),
-	bundlerCtrl = require('./engine/controllers/bundler');
+	dataCtrl = require('./vault/controllers/data-builder'),
+	bundlerCtrl = require('./vault/controllers/bundler');
 
 var sassOpts = {},
 	sassDest = './styleguide/assets/css',
 	jsDest = './styleguide/assets/js',
-	ccssDest = './engine/public/css',
-	cjsDest = './engine/public/js',
+	ccssDest = './vault/public/css',
+	cjsDest = './vault/public/js',
 	jsMinAction = mods.util.noop,
-	copyTasks = ['/engine/public/fonts'],
+	copyTasks = ['/vault/public/fonts'],
 	createBundleCopy = function (path) {
 		var asset = path.match(/(\w+)$/g),
 			destDir = './' + config.bundleDir + '/assets/' + asset,
@@ -62,7 +62,7 @@ var sassOpts = {},
 		'config.js',
 		'app.js'
 	],
-	curatorJS = jsFiles.map(assetUrlzr.bind(null, 'engine/src','js')),
+	curatorJS = jsFiles.map(assetUrlzr.bind(null, 'vault/src','js')),
 	materialJS = config.jsFiles.map(assetUrlzr.bind(null, 'styleguide/materials','js')),
 	materialCSS = config.cssFiles.map(assetUrlzr.bind(null, 'styleguide/materials', null)),
 	urlPatterns = {
@@ -88,7 +88,7 @@ var sassOpts = {},
 				.pipe(jsMinAction);
 
 gulp.task('curator:css', function () {
-	return gulp.src('./engine/src/scss/curator.scss')
+	return gulp.src('./vault/src/scss/curator.scss')
 			.pipe(mods.sass(sassOpts).on('error', logSassError))
 			.pipe(sassTasks())
 			.pipe(gulp.dest(ccssDest));
@@ -145,11 +145,11 @@ gulp.task('set:dist', function () {
 });
 
 gulp.task('curator:watch', ['curator:assets'], function () {
-	mods.watch('./engine/src/js/**/*.js', mods.batch(function (events, done) {
+	mods.watch('./vault/src/js/**/*.js', mods.batch(function (events, done) {
 		mods.runSequence('curator:js', done);
 	}));
 	
-	mods.watch('./engine/src/scss/**/*.scss', mods.batch(function (events, done) {
+	mods.watch('./vault/src/scss/**/*.scss', mods.batch(function (events, done) {
 		mods.runSequence('curator:css', done);
 	}));
 	
