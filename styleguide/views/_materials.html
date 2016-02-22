@@ -14,7 +14,7 @@
 				<header class="c-mat-header">
 					<h1 class="c-heading-4">
 						{{comp.name}}
-						{% if comp.types.length === 1 %}
+						{% if comp.types.length == 1 %}
 						<a href="#" class="c-link" data-toggle-src="{{comp.types[0].id}}"><i class="c-icon-code"></i></a>
 						{% endif %}
 					</h1>
@@ -30,7 +30,7 @@
 							</h3>
 							{% endif %}
 							<!-- Print out notes & formatted code from snippet. -->
-							{% if type.html.notes || type.html.formatted %}
+							{% if type.html.notes or type.html.formatted %}
 							<div class="c-mat-doc">
 								{{type.html.notes}}
 								{% if type.html.formatted %}

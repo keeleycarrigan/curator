@@ -9,16 +9,7 @@ var config = require('./config.json'),
 	bs = require('browser-sync').create(),
 	app = require('./engine/app'),
 	fileProcess = require('./engine/controllers/process'),
-	swig = require('swig'),
 	appData = require('./data.json'),
-	swigOpts = {
-		cache: false,
-		autoescape: false,
-		locals: {
-			appData: appData,
-			dev: true
-		}
-	},
 	procs = {};
 	
 var bsError = function (err, bs) {
@@ -48,10 +39,8 @@ cli.main(function (args, opts) {
 		var devMode = opts.dev;
 
 		if (opts.bundle) {
-			swigOpts.locals.dev = false;
+			app.nunjucks.addGlobal('dev', false);
 		}
-
-		swig.setDefaults(swigOpts);
 		
 		app.start().then(function () {
 			var localPort = parseInt(config.localPort, 10);
